@@ -15,3 +15,6 @@ To remove a file:
 2º git commit
 3º git push
 
+To compile:
+
+g++ Source.cpp -static `pkg-config opencv --libs --cflags` -dynamic
