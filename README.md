@@ -17,4 +17,5 @@ To remove a file:
 
 To compile:
 
-g++ Source.cpp -static `pkg-config opencv --libs --cflags` -dynamic
+g++ Source.cpp -Wl,-Bstatic `pkg-config opencv --libs --cflags` -Wl,-Bdynamic
+
