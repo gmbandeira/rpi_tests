@@ -15,6 +15,11 @@ using namespace cv;
 int main( int argc, const char** argv )
 {
 	VideoCapture cap(0);
+	if(!cap.isOpened())
+	{
+		cout << "cap error";
+		return -1;
+	}
 	Mat img;
 	while(1)
 	{
