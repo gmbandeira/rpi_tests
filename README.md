@@ -29,3 +29,8 @@ Secure Operations:
 	3 Secure Execute:
 	4 Secure remove:
 
+================
+
+Dynamic and Static Compile
+
+g++ Source.cpp -Wl,-Bstatic `pkg-config opencv --libs --cflags` -Wl,-Bdynamic
