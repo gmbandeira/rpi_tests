@@ -19,3 +19,13 @@ To compile:
 
 g++ Source.cpp -Wl,-Bstatic `pkg-config opencv --libs --cflags` -Wl,-Bdynamic
 
+===========
+
+Secure Operations:
+	1 secure Copy:
+		scp README.md pi@192.168.0.169:/home/pi
+
+	2 Secure Move:
+	3 Secure Execute:
+	4 Secure remove:
+
