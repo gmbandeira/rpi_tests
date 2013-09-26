@@ -108,7 +108,7 @@ int		nxtClose		();
 void v4l_loop()
 {
 	cvtToOpencv();
-	getCapTime = clock() - getCapTime;
+//	getCapTime = clock() - getCapTime;
 
 	original = img.clone();
 
@@ -152,7 +152,7 @@ void v4l_loop()
 
 //	std::cout << "\tB: " << initialSpeed + (error * KP) << "\tC: " << initialSpeed - (error * KP);
 //	std::cout << "\tError: " << error << std::endl;
-	getCapTime = clock();
+//	getCapTime = clock();
 }
 
 #else
@@ -243,19 +243,18 @@ void legoAct(int error)
 
 void merge(cv::Mat dest, cv::Mat img0, cv::Mat img1)
 {
-	uchar *temp = dest.data, *tempImg0 = img0.data, *tempImg1 = img1.data;
+	uchar *temp = dest.data, *tempImg0 = img0.data, *tempImg1 = img1.data, *end = dest.dataend;
 
-	while(temp != dest.dataend)
+	do
 	{
-		if(*(tempImg0) || *(tempImg1))
+		if(*(tempImg0++))
+			*(temp++) = 255;
+		else if(*(tempImg1++))
 			*(temp++) = 255;
 		else
 			*(temp++) = 0;
-		tempImg0++;
-		tempImg1++;
-	}
+	} while(temp != end);
 }
-
 int dir(cv::Mat img, int proportional, float precision)
 {
 	int direction = 0, jump = 3;
@@ -541,16 +540,21 @@ int main()
 		buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 		buf.memory = V4L2_MEMORY_MMAP;
 		
-		// GET CAP
-		xioctl(fd, VIDIOC_DQBUF, &buf);
-		getCapTime = clock() - getCapTime;
+		getCapTime = clock();
+		for(;;)
+		{
+			// GET CAP
+			xioctl(fd, VIDIOC_DQBUF, &buf);
 
-		cvtToOpencv();
+			cvtToOpencv();
 
-		v4l_loop();
+			getCapTime = clock() - getCapTime;
+			v4l_loop();
+			getCapTime = clock();
 
-		// "PREPARE" NEXT CAP
-		xioctl(fd, VIDIOC_QBUF, &buf);
+			// "PREPARE" NEXT CAP
+			xioctl(fd, VIDIOC_QBUF, &buf);
+		}
 	}
 
 	// STOP STREAMING
