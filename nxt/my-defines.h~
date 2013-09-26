@@ -77,8 +77,8 @@
 #ifndef _MY_V4L_DEFINES_
 #define _MY_V4L_DEFINES_
 
-	#define WIDTH 640
-	#define HEIGHT 480
+	#define WIDTH 320
+	#define HEIGHT 240
 	#define NUM_OF_CAPS -1
 
 	#ifdef LINUX	
