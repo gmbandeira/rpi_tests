@@ -1,6 +1,5 @@
 
 // g++ Source.cpp `pkg-config opencv --libs --cflags` -lusb-1.0 -lv4l2
-//#include <windows.h>
 
 #include <opencv2/opencv.hpp>
 #include <opencv/highgui.h>
@@ -411,39 +410,45 @@ int main()
 
 	if(r < 0)
 	{
-			std::cout << "Init error" << std::endl;
+		std::cout << "Init error" << std::endl;
+		#ifdef NXT_ESSENTIAL
 			return -1;
+		#endif
 	}
 
 	libusb_set_debug(ctx, 3);               // set verbosity to level 3
 	cnt = libusb_get_device_list(ctx, &devs);       // get the list of devices
 	if(cnt < 0)
 	{
-			std::cout << "Device error" << std::endl;
+		std::cout << "Device error" << std::endl;
+		#ifdef NXT_ESSENTIAL
 			return -1;
+		#endif
 	}
 
 	dev_handle = libusb_open_device_with_vid_pid(ctx, VENDOR_ID, PRODUCT_ID);
 	if(dev_handle == NULL)
-			std::cout << "Device Handle Error" << std::endl;
+		std::cout << "Device Handle Error" << std::endl;
 	else
-			std::cout << "Device Opened" << std::endl;
+		std::cout << "Device Opened" << std::endl;
 
 	libusb_free_device_list(devs, 1);               //free device list and unref devices in it
 
 	if(libusb_kernel_driver_active(dev_handle, 0) == 1)             //kernel has control over the device. Take him that!
 	{
-			std::cout << "kernel has control..." << std::endl;
-			if(libusb_detach_kernel_driver(dev_handle, 0) == 0)
-					std::cout << "...not anymore..." << std::endl;
+		std::cout << "kernel has control..." << std::endl;
+		if(libusb_detach_kernel_driver(dev_handle, 0) == 0)
+			std::cout << "...not anymore..." << std::endl;
 	}
 
 	r = libusb_claim_interface(dev_handle, 0);                      //claim interface 0 of device
 
 	if(r < 0)
 	{
-			std::cout << "can not claim" << std::endl;
+		std::cout << "can not claim" << std::endl;
+		#ifdef NXT_ESSENTIAL
 			return -1;
+		#endif
 	}
 
 	std::cout << "Interface claimed" << std::endl;
@@ -524,7 +529,7 @@ int main()
 	//GET CAP
 	for (;;)
 	{
-		do
+		/*do
 		{
 			FD_ZERO(&fds);
 			FD_SET(fd, &fds);
@@ -534,33 +539,35 @@ int main()
 
 			r = select(fd + 1, &fds, NULL, NULL, &tv);
 		} while ((r == -1 && (errno = EINTR)));
-
+		
 		if (r == -1)
 		{
 			perror("select");
 			return errno;
-		}
+		}*/
 
 		CLEAR(buf);
 		buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 		buf.memory = V4L2_MEMORY_MMAP;
 
+		// SAVE A CAP
+		xioctl(fd, VIDIOC_DQBUF, &buf);
 		saveCap();
+		xioctl(fd, VIDIOC_QBUF, &buf);
 		
 		getCapTime = clock();
 		for(;;)
 		{
 			// GET CAP
 			xioctl(fd, VIDIOC_DQBUF, &buf);
+			// "PREPARE" NEXT CAP
+			xioctl(fd, VIDIOC_QBUF, &buf);
 
 			cvtToOpencv();
 
 			getCapTime = clock() - getCapTime;
 			v4l_loop();
 			getCapTime = clock();
-
-			// "PREPARE" NEXT CAP
-			xioctl(fd, VIDIOC_QBUF, &buf);
 		}
 	}
 

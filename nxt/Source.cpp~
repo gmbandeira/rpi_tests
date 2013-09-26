@@ -141,7 +141,6 @@ void v4l_loop()
 
 	std::cout << std::endl << "getCap: " << ((float)getCapTime)/CLOCKS_PER_SEC << "\tto HSV: " << ((float)toHSVTime)/CLOCKS_PER_SEC 
 		<< "\tgetRed: " << ((float)getRedTime)/CLOCKS_PER_SEC << "\tMerge: " << ((float)mergeTime)/CLOCKS_PER_SEC << "\tgetTarget: " << ((float)getTargetTime)/CLOCKS_PER_SEC;
-
 #endif
 #ifdef PRINT_CLOCKS
 
@@ -173,6 +172,8 @@ void loop()
 	cv::namedWindow("blue");
 	cv::namedWindow("original");
 	cv::namedWindow("merged");
+
+	//cap.set(CV_CAP_PROP_FRAME_WIDTH, 320);
 
 	while(1)
 	{
@@ -477,7 +478,7 @@ int main()
 
 	// INIT MEMORY MAPPING
 	CLEAR(req);
-	req.count		= 2;
+	req.count		= 1;
 	req.type		= V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	req.memory		= V4L2_MEMORY_MMAP;
 	xioctl(fd, VIDIOC_REQBUFS, &req);
@@ -543,9 +544,10 @@ int main()
 		CLEAR(buf);
 		buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 		buf.memory = V4L2_MEMORY_MMAP;
+
+		saveCap();
 		
 		getCapTime = clock();
-		saveCap();
 		for(;;)
 		{
 			// GET CAP
@@ -777,7 +779,7 @@ void xioctl(int fh, int request, void *arg)
 
 void saveCap()
 {
-	sprintf(out_name, "out%03d.ppm", i);
+	sprintf(out_name, "out000.ppm");
 	fout = fopen(out_name, "w");
 	if (!fout)
 	{
