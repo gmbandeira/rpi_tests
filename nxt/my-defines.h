@@ -3,9 +3,9 @@
 
 	#define VENDOR_ID 1684
 	#define PRODUCT_ID 2
-	#define MAX_ADDR	001653181487
+	#define MAC_ADDR 001653181487
 
-	#ifndef _WIN32
+	#if defined LINUX
 		#define OUT_A 0x00
 		#define OUT_B 0x01
 		#define OUT_C 0x02
@@ -53,38 +53,38 @@
 	#define MIN_BLUE 0
 	#define MAX_BLUE 120
 
-	#define MIN_HUE_RED 0
-	#define MAX_HUE_RED 2
+	#define MIN_VALUE_RED 130
+	#define MAX_VALUE_RED 256
 
-	#define MIN_VALUE_RED 0
-	#define MAX_VALUE_RED 255
+	#define MIN_HUE_RED 50
+	#define MAX_HUE_RED 256
 
 	#define MIN_SATURATION_RED 150
-	#define MAX_SATURATION_RED 255
+	#define MAX_SATURATION_RED 256
 
 
-	#define MIN_HUE_BLUE 105
-	#define MAX_HUE_BLUE 120
+	#define MIN_VALUE_BLUE 80
+	#define MAX_VALUE_BLUE 140
 
-	#define MIN_VALUE_BLUE 0
-	#define MAX_VALUE_BLUE 255
+	#define MIN_HUE_BLUE 0
+	#define MAX_HUE_BLUE 256
 
 	#define MIN_SATURATION_BLUE 100
-	#define MAX_SATURATION_BLUE 150
+	#define MAX_SATURATION_BLUE 256
 
 #endif
 
 #ifndef _MY_V4L_DEFINES_
 #define _MY_V4L_DEFINES_
 
-	#define WIDTH 320
-	#define HEIGHT 240
+	#define WIDTH 640
+	#define HEIGHT 480
 	#define NUM_OF_CAPS -1
 
-	#ifdef _WIN32
-		#define DEVICE_NAME 0
-	#else
+	#ifdef LINUX	
 		#define DEVICE_NAME "/dev/video0"
+	#elif _WIN32
+		#define DEVICE_NAME 0
 	#endif
 
 #endif
@@ -93,7 +93,7 @@
 #define _NXT_MOTOR_MOVE_DEFINES_
 
 	#define KP 3
-	#define initialSpeed 75
+	#define initialSpeed 30
 
 	#define MAX_SPEED 100
 	#define MIN_SPEED 60
