@@ -152,7 +152,7 @@ void v4l_loop()
 
 //	std::cout << "\tB: " << initialSpeed + (error * KP) << "\tC: " << initialSpeed - (error * KP);
 //	std::cout << "\tError: " << error << std::endl;
-	getCapTime = clock();
+//	getCapTime = clock();
 }
 
 #else
