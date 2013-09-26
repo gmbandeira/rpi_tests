@@ -1,4 +1,4 @@
-//g++ Source.cpp `pkg-config opencv --libs --cflags` -lusb1.0
+//g++ Source.cpp `pkg-config opencv --libs --cflags` -lusb-1.0
 	#include <opencv2/opencv.hpp>
 	#include <opencv/highgui.h>
 	#include <opencv2/core/types_c.h>
@@ -44,11 +44,11 @@ bool	isRed			(cv::Scalar dot);
 bool	isBlue			(cv::Scalar dot);
 void	getRed			(cv::Mat dest);
 void	getBlue			(cv::Mat dest);
-int		main			();
+int	main			();
 
 void	motorPID		(int error);
-void	motorMove		(int out, int speed);
-int		motorMove		(uchar motor, uchar speed, uchar mode, uchar regulation, uchar turn);
+void	motorMove		(int out, int speed = 50);
+int	motorMove		(unsigned char motor, unsigned char speed = 50, unsigned char mode = 0x01, unsigned char regulation = 0x01, unsigned char turn = 0x90);
 int		nxtClose		();
 
 
@@ -296,7 +296,7 @@ int main()
 		return -1;
 	}
 
-#elif LINUX
+#else
 	libusb_device **devs;                   // list of devices read
 	ctx = NULL;								// session
 	int r;                                  // for the return values
@@ -363,7 +363,7 @@ int nxtClose()
 		NXT::Motor::BrakeOn(&comm, OUT_C);		
 		NXT::Close(&comm);
 	//}
-#elif LINUX
+#else
 	motorMove(OUT_ABC, 0);
 
 	int r = libusb_release_interface(dev_handle, 0);
@@ -390,7 +390,7 @@ void motorMove(int out, int speed)
 	//}
 }
 
-#elif LINUX
+#else
 /*
  motor = 0x00 -> motor A
  motor = 0x01 -> motor B

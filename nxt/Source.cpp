@@ -1,4 +1,4 @@
-//g++ Source.cpp `pkg-config opencv --libs --cflags` -lusb1.0
+//g++ Source.cpp `pkg-config opencv --libs --cflags` -lusb-1.0
 	#include <opencv2/opencv.hpp>
 	#include <opencv/highgui.h>
 	#include <opencv2/core/types_c.h>
@@ -44,11 +44,14 @@ bool	isRed			(cv::Scalar dot);
 bool	isBlue			(cv::Scalar dot);
 void	getRed			(cv::Mat dest);
 void	getBlue			(cv::Mat dest);
-int		main			();
+int	main			();
 
 void	motorPID		(int error);
-void	motorMove		(int out, int speed);
-int		motorMove		(uchar motor, uchar speed, uchar mode, uchar regulation, uchar turn);
+#ifdef _WIN32
+void	motorMove		(int out, int speed = 50);
+#else
+int	motorMove		(unsigned char motor, unsigned char speed = 50, unsigned char mode = 0x01, unsigned char regulation = 0x01, unsigned char turn = 0x90);
+#endif
 int		nxtClose		();
 
 
