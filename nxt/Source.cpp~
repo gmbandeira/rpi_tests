@@ -23,8 +23,15 @@
 		#include <linux/videodev2.h>
 		#include "libv4l2.h"
 		#include <linux/v4l2-mediabus.h>
-
 		#include <libusb-1.0/libusb.h>
+
+		#define CLEAR(x) memset(&(x), 0, sizeof(x))
+
+		struct buffer
+		{
+			void   *start;
+			size_t length;
+		};
 	#endif
 #include "my-defines.h"
 //#define	PRINT_SECONDS
@@ -85,12 +92,10 @@ int		nxtClose		();
 
 void v4l_loop()
 {
-	cvtToOpencv();
-	timeLast = endTime - cap.get(CV_CAP_PROP_POS_MSEC);
 	getCapTime = clock();
-	cap >> img;
-	original = img.clone();
+	cvtToOpencv();
 	getCapTime = clock() - getCapTime;
+	original = img.clone();
 	toHSVTime = clock();
 	cv::cvtColor(img, img, CV_BGR2HSV);
 	toHSVTime = clock() - toHSVTime;
@@ -119,7 +124,7 @@ void v4l_loop()
 	std::cout << "\tError: " << error << std::endl;
 }
 
-#endif
+#else
 	
 void loop()
 {
@@ -176,6 +181,8 @@ void loop()
 		if(cvWaitKey(30) > 0 || timeLast < 1100) break;
 	}
 }
+
+#endif
 void legoAct(int error)
 {
 
@@ -689,7 +696,6 @@ void cvtToOpencv()
 	uchar *pointer = ((uchar*)buffers[buf.index].start);
 	//char primeiro = 0, segundo = 0, terceiro = 0;
 	img = cv::Mat(HEIGHT, WIDTH, CV_8UC3);
-	img.
 
 	//while(pointer != end)
 	//{
