@@ -142,6 +142,7 @@ void v4l_loop()
 	std::cout << std::endl << "getCap: " << ((float)getCapTime)/CLOCKS_PER_SEC << "\tto HSV: " << ((float)toHSVTime)/CLOCKS_PER_SEC 
 		<< "\tgetRed: " << ((float)getRedTime)/CLOCKS_PER_SEC << "\tgetTarget: " << ((float)getTargetTime)/CLOCKS_PER_SEC;
 
+#endif
 #ifdef PRINT_CLOCKS
 
 	std::cout << std::endl << "getCap: " << ((float)getCapTime) << "\tto HSV: " << ((float)toHSVTime)
