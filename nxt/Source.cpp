@@ -56,7 +56,7 @@ int		nxtClose		();
 
 
 
-cv::VideoCapture cap("/dev/video0");
+cv::VideoCapture cap("/dev/media0");
 //dlib_lego lego();
 
 

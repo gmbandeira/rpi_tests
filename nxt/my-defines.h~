@@ -4,7 +4,7 @@
 	#define VENDOR_ID 1684
 	#define PRODUCT_ID 2
 
-	#if defined LINUX
+	#ifndef _WIN32
 		#define OUT_A 0x00
 		#define OUT_B 0x01
 		#define OUT_C 0x02
@@ -80,10 +80,10 @@
 	#define HEIGHT 240
 	#define NUM_OF_CAPS -1
 
-	#ifdef LINUX	
-		#define DEVICE_NAME "/dev/video0"
-	#elif _WIN32
+	#ifdef _WIN32
 		#define DEVICE_NAME 0
+	#else
+		#define DEVICE_NAME "/dev/video0"
 	#endif
 
 #endif

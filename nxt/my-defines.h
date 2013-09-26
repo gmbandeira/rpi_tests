@@ -3,6 +3,7 @@
 
 	#define VENDOR_ID 1684
 	#define PRODUCT_ID 2
+	#define MAX_ADDR	001653181487
 
 	#ifndef _WIN32
 		#define OUT_A 0x00
