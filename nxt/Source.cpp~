@@ -296,7 +296,7 @@ int main()
 		return -1;
 	}
 
-#else
+#elif LINUX
 	libusb_device **devs;                   // list of devices read
 	ctx = NULL;								// session
 	int r;                                  // for the return values
@@ -363,7 +363,7 @@ int nxtClose()
 		NXT::Motor::BrakeOn(&comm, OUT_C);		
 		NXT::Close(&comm);
 	//}
-#else
+#elif LINUX
 	motorMove(OUT_ABC, 0);
 
 	int r = libusb_release_interface(dev_handle, 0);
@@ -390,7 +390,7 @@ void motorMove(int out, int speed)
 	//}
 }
 
-#else
+#elif LINUX
 /*
  motor = 0x00 -> motor A
  motor = 0x01 -> motor B
