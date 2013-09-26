@@ -42,8 +42,8 @@
 
 #include "my-defines.h"
 
-#define	PRINT_SECONDS
-//#define	PRINT_CLOCKS
+//#define	PRINT_SECONDS
+#define	PRINT_CLOCKS
 //#define	PRINT_ERROR
 #define OPENCV_ESSENTIAL
 //#define NXT_ESSENTIAL

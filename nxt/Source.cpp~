@@ -146,7 +146,7 @@ void v4l_loop()
 #ifdef PRINT_CLOCKS
 
 	std::cout << std::endl << "getCap: " << ((float)getCapTime) << "\tto HSV: " << ((float)toHSVTime)
-		<< "\tgetRed: " << ((float)getRedTime) << "\tMerge: " << (float)mergeTime <<  "\tMerge: " << ((float)mergeTime) << "\tgetTarget: " << ((float)getTargetTime);
+		<< "\tgetRed: " << ((float)getRedTime) << "\tMerge: " << ((float)mergeTime) << "\tgetTarget: " << ((float)getTargetTime);
 
 #endif
 
