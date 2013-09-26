@@ -483,7 +483,7 @@ int main()
 
 	// INIT MEMORY MAPPING
 	CLEAR(req);
-	req.count		= 30;
+	req.count		= 1;
 	req.type		= V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	req.memory		= V4L2_MEMORY_MMAP;
 	xioctl(fd, VIDIOC_REQBUFS, &req);
