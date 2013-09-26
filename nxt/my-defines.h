@@ -5,7 +5,7 @@
 	#define PRODUCT_ID 2
 	#define MAC_ADDR 001653181487
 
-	#if defined LINUX
+	#ifndef _WIN32
 		#define OUT_A 0x00
 		#define OUT_B 0x01
 		#define OUT_C 0x02
