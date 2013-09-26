@@ -1,6 +1,6 @@
 
 // g++ Source.cpp `pkg-config opencv --libs --cflags` -lusb-1.0 -lv4l2
-#include <windows.h>
+//#include <windows.h>
 
 #include <opencv2/opencv.hpp>
 #include <opencv/highgui.h>
