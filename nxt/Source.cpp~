@@ -47,8 +47,11 @@ void	getBlue			(cv::Mat dest);
 int	main			();
 
 void	motorPID		(int error);
+#ifdef _WIN32
 void	motorMove		(int out, int speed = 50);
+#else
 int	motorMove		(unsigned char motor, unsigned char speed = 50, unsigned char mode = 0x01, unsigned char regulation = 0x01, unsigned char turn = 0x90);
+#endif
 int		nxtClose		();
 
 
@@ -60,7 +63,7 @@ cv::VideoCapture cap(DEVICE_NAME);
 #ifdef _WIN32
 	Comm::NXTComm				comm;
 #else
-	libusb_device_handle		*dev_handle;
+	libusb_device_handle			*dev_handle;
 	libusb_context				*ctx;
 #endif
 

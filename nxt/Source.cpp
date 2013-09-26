@@ -63,7 +63,7 @@ cv::VideoCapture cap(DEVICE_NAME);
 #ifdef _WIN32
 	Comm::NXTComm				comm;
 #else
-	libusb_device_handle		*dev_handle;
+	libusb_device_handle			*dev_handle;
 	libusb_context				*ctx;
 #endif
 
@@ -269,7 +269,7 @@ int main()
 				#ifdef _WIN32
 					system("pause");
 				#endif
-                return -1;
+//                return -1;
         }
 
 // MINDSTORMS
