@@ -43,7 +43,7 @@
 #include "my-defines.h"
 
 //#define	PRINT_SECONDS
-//#define	PRINT_CLOCKS
+#define	PRINT_CLOCKS
 //#define	PRINT_ERROR
 #define OPENCV_ESSENTIAL
 //#define NXT_ESSENTIAL
@@ -142,14 +142,15 @@ void v4l_loop()
 	std::cout << std::endl << "getCap: " << ((float)getCapTime)/CLOCKS_PER_SEC << "\tto HSV: " << ((float)toHSVTime)/CLOCKS_PER_SEC 
 		<< "\tgetRed: " << ((float)getRedTime)/CLOCKS_PER_SEC << "\tgetTarget: " << ((float)getTargetTime)/CLOCKS_PER_SEC;
 
-#elif defined PRINT_CLOCKS
+#ifdef PRINT_CLOCKS
 
 	std::cout << std::endl << "getCap: " << ((float)getCapTime) << "\tto HSV: " << ((float)toHSVTime)
-		<< "\tgetRed: " << ((float)getRedTime) << "\tgetTarget: " << ((float)getTargetTime);
+		<< "\tgetRed: " << ((float)getRedTime) << "\tMerge: " << (float)mergeTime << "\tgetTarget: " << ((float)getTargetTime);
 
 #endif
 
-	std::cout << "\tError: " << error << std::endl;
+//	std::cout << "\tB: " << initialSpeed + (error * KP) << "\tC: " << initialSpeed - (error * KP);
+//	std::cout << "\tError: " << error << std::endl;
 	getCapTime = clock();
 }
 
