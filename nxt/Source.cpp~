@@ -42,8 +42,8 @@
 
 #include "my-defines.h"
 
-#define	PRINT_SECONDS
-//#define	PRINT_CLOCKS
+//#define	PRINT_SECONDS
+#define	PRINT_CLOCKS
 //#define	PRINT_ERROR
 #define OPENCV_ESSENTIAL
 //#define NXT_ESSENTIAL
@@ -245,16 +245,20 @@ void merge(cv::Mat dest, cv::Mat img0, cv::Mat img1)
 {
 	uchar *temp = dest.data, *tempImg0 = img0.data, *tempImg1 = img1.data, *end = dest.dataend;
 
-	do
+	while(temp != end)
 	{
 		if(*(tempImg0++))
+		{
 			*(temp++) = 255;
+			*(tempImg1++);
+		}
 		else if(*(tempImg1++))
 			*(temp++) = 255;
 		else
 			*(temp++) = 0;
-	} while(temp != end);
+	}
 }
+
 int dir(cv::Mat img, int proportional, float precision)
 {
 	int direction = 0, jump = 3;
