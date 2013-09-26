@@ -81,7 +81,6 @@ int		nxtClose		();
 	char								out_name[256];
 	FILE								*fout;
 	struct buffer						*buffers;
-	clock_t								getCapTime;
 
 #endif
 #ifndef _WIN32

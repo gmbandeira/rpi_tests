@@ -21,7 +21,7 @@
 		#include <sys/time.h>
 		#include <sys/mman.h>
 		#include <linux/videodev2.h>
-		#include "libv4l2.h"
+		#include <libv4l2.h>
 		#include <linux/v4l2-mediabus.h>
 		#include <libusb-1.0/libusb.h>
 
