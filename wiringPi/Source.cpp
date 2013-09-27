@@ -3,6 +3,7 @@
 // g++ Source.cpp -I/usr/local/include -L/usr/local/lib -lwiringPi
 
 #include <wiringPi.h>
+#include <iostream>
 
 int main()
 {
