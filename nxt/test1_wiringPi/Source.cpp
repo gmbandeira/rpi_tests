@@ -106,7 +106,6 @@ int		nxtClose		();
 
 void v4l_loop()
 {
-	digitalWrite(0, 0);
 	cvtToOpencv();
 	original = img.clone();
 	cv::cvtColor(img, img, CV_BGR2HSV);
@@ -119,6 +118,7 @@ void v4l_loop()
 
 	error = getDirection(img, 60);
 
+	digitalWrite(0, 0);
 	legoAct(error);
 	digitalWrite(0, 1);
 }
