@@ -383,11 +383,11 @@ int main()
 		pinMode(i, OUTPUT);
 	
 	//digitalWrite(1, 1);
-	digitalWriteByte(B10101010);
+	digitalWriteByte(170);
 	delay(100);
-	digitalWriteByte(B01010101);
+	digitalWriteByte(85);
 	delay(100);
-	digitalWriteByte(B00000000);
+	digitalWriteByte(0);
 
 	r = piHiPri (10); // set program scheduling priority between 0 and 99
 	if(r < 0)

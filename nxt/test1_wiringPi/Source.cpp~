@@ -28,7 +28,7 @@
 	#include <libv4l2.h>
 	#include <linux/v4l2-mediabus.h>
 	#include <libusb-1.0/libusb.h>
-	#include <winringPi.h>
+	#include <wiringPi.h>
 
 	#define CLEAR(x) memset(&(x), 0, sizeof(x))
 
