@@ -17,11 +17,11 @@ for(int i = 0; i < 8; i++)
 		pinMode(i, OUTPUT);
 	
 	//digitalWrite(1, 1);
-	digitalWriteByte(B10101010);
+	digitalWriteByte(170);
 	delay(100);
-	digitalWriteByte(B01010101);
+	digitalWriteByte(85);
 	delay(100);
-	digitalWriteByte(B00000000);
+	digitalWriteByte(0);
 
 main();
 return 0;
