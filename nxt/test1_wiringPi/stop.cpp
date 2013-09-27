@@ -1,7 +1,8 @@
-// g++ Source.cpp `pkg-config opencv --libs --cflags` -lusb-1.0 -lv4l2 -I/usr/local/include -L/usr/local/lib -lwiringPi
+// g++ stop.cpp -lusb-1.0 -I/usr/local/include -L/usr/local/lib -lwiringPi
 
 #include <wiringPi.h>
 #include <libusb-1.0/libusb.h>
+#include <iostream>
 #include "my-defines.h"
 
 // Lib USB 1.0
@@ -15,6 +16,9 @@ int main()
 	libusb_open_device_with_vid_pid(ctx, VENDOR_ID, PRODUCT_ID);
 	libusb_claim_interface(dev_handle, 0);	
 	nxtClose();
+	for(int i = 0; i < 8; i++)
+		pinMode(i, OUTPUT);
+	digitalWriteByte(0);
 }
 
 int motorMove(uchar motor, uchar speed, uchar mode, uchar regulation, uchar turn)
