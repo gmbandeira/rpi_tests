@@ -9,19 +9,7 @@
 	libusb_device_handle				*dev_handle;
 	libusb_context					*ctx;
 
-int main()
-{
-	libusb_init(&ctx);
-	libusb_set_debug(ctx, 3);
-	libusb_open_device_with_vid_pid(ctx, VENDOR_ID, PRODUCT_ID);
-	libusb_claim_interface(dev_handle, 0);	
-	nxtClose();
-	for(int i = 0; i < 8; i++)
-		pinMode(i, OUTPUT);
-	digitalWriteByte(0);
-}
-
-int motorMove(uchar motor, uchar speed, uchar mode, uchar regulation, uchar turn)
+int motorMove(unsigned char motor, unsigned char speed, unsigned char mode, unsigned char regulation, unsigned char turn)
 {
     unsigned char *data = new unsigned char[9];     //data to send
     int sendAmount = 9;                             //how many data to send
@@ -55,4 +43,15 @@ int nxtClose()
 	return 0;
 }
 
+int main()
+{
+	libusb_init(&ctx);
+	libusb_set_debug(ctx, 3);
+	libusb_open_device_with_vid_pid(ctx, VENDOR_ID, PRODUCT_ID);
+	libusb_claim_interface(dev_handle, 0);	
+	nxtClose();
+	for(int i = 0; i < 8; i++)
+		pinMode(i, OUTPUT);
+	digitalWriteByte(0);
+}
 
