@@ -5,6 +5,7 @@
 #include <wiringPi.h>
 
 int main()
+{
 int r = wiringPiSetup();
 if(r < 0)
 {
