@@ -9,7 +9,7 @@
 	libusb_device_handle				*dev_handle;
 	libusb_context					*ctx;
 
-int motorMove(unsigned char motor, unsigned char speed, unsigned char mode, unsigned char regulation, unsigned char turn)
+int motorMove(unsigned char motor = 0xff, unsigned char speed = 50, unsigned char mode = 1, unsigned char regulation = 1, unsigned char turn = 0x90)
 {
     unsigned char *data = new unsigned char[9];     //data to send
     int sendAmount = 9;                             //how many data to send
