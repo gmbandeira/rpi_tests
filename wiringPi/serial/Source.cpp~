@@ -36,6 +36,8 @@ int main()
 	}
 	
 	digitalWrite(0, 1);
+	
+	serialClose(serialFD);
 
 	return 0;
 }
