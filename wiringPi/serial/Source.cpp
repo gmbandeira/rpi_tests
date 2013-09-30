@@ -50,7 +50,7 @@ int main()
 	
 	digitalWrite(0, 1);
 	
-	for(unsigned char outBuffer = 0; outBuffer < 'x'; outBuffer++
+	for(unsigned char outBuffer = 0; outBuffer < 'x'; outBuffer++)
 		serialPutchar(serialFD, outBuffer);
 	
 	while(1)
