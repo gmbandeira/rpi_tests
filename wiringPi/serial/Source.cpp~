@@ -58,7 +58,7 @@ int main()
 				break;
 			
 			serialFlush(serialFD);
-			std::cout << "received: " << (int)inbuffer << std::endl;
+			std::cout << "received: " << (int)inbuffer - '0' << std::endl;
 //		}
 	}
 	
