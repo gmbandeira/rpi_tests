@@ -37,6 +37,18 @@ int main()
 	
 	digitalWrite(0, 1);
 	
+	while(1)
+	{
+		if(serialDataAvail(serialFD) > 0)
+		{
+			char inbuffer = serialGetchar(serialFD);
+			if(inbuffer == 'x')
+				break;
+			
+			std::cout << "received: " << inbuffer << std::endl;
+		}
+	}
+	
 	serialClose(serialFD);
 
 	return 0;
