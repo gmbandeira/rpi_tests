@@ -35,6 +35,18 @@ int main()
 		std::cout << "connected USB device: " << serialFD << std::endl;
 	}
 	
+	digitalWrite(0, 0);
+	
+	if(wiringPiSetup() == -1)
+	{
+		std::cout << "error seting up comm" << std::endl;
+		return -1;
+	}
+	else
+	{
+		std::cout << "comm sucessfully set up" << std::endl;
+	}
+	
 	digitalWrite(0, 1);
 	
 	while(1)
@@ -50,6 +62,7 @@ int main()
 	}
 	
 	serialClose(serialFD);
+	digitalWrite(0, 0);
 
 	return 0;
 }
