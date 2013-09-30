@@ -8,6 +8,7 @@
 
 int main()
 {
+/*
 	int r = wiringPiSetup();
 	if(r < 0)
 	{
@@ -23,7 +24,7 @@ int main()
 	digitalWriteByte(85);
 	delay(100);
 	digitalWriteByte(0);
-	
+*/	
 	int serialFD = serialOpen("/dev/ttyUSB0", 9600);
 	if(serialFD < 0)
 	{

@@ -51,14 +51,14 @@ int main()
 	
 	while(1)
 	{
-		if(serialDataAvail(serialFD) > 0)
-		{
+//		if(serialDataAvail(serialFD) > 0)
+//		{
 			char inbuffer = serialGetchar(serialFD);
 			if(inbuffer == 'x' || inbuffer == -1)
 				break;
 			
 			std::cout << "received: " << inbuffer << std::endl;
-		}
+//		}
 	}
 	
 	serialClose(serialFD);
