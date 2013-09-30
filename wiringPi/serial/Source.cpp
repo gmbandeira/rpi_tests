@@ -3,7 +3,7 @@
 // g++ Source.cpp -I/usr/local/include -L/usr/local/lib -lwiringPi 
 
 #include <wiringPi.h>
-#include <wiringSerial.h>
+//#include <wiringSerial.h>
 #include <iostream>
 
 int main()
@@ -24,7 +24,7 @@ int main()
 	delay(100);
 	digitalWriteByte(0);
 	
-	int serialFD = serialOpen("/dev/ttyAMA0", 115200);
+	int serialFD = serialOpen("/dev/ttyUSB0", 9600);
 	if(serialFD < 0)
 	{
 		std::cout << "error connecting usb device" << std::endl;
@@ -51,14 +51,14 @@ int main()
 	
 	while(1)
 	{
-		if(serialDataAvail(serialFD) > 0)
-		{
+//		if(serialDataAvail(serialFD) > 0)
+//		{
 			char inbuffer = serialGetchar(serialFD);
-			if(inbuffer == 'x')
+			if(inbuffer == 'x' || inbuffer == -1)
 				break;
 			
 			std::cout << "received: " << inbuffer << std::endl;
-		}
+//		}
 	}
 	
 	serialClose(serialFD);
