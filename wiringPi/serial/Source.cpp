@@ -59,14 +59,12 @@ int main()
 //		{
 			int inbuffer = serialGetchar(serialFD);
 			if(inbuffer == 'x' || inbuffer == -1 || inbuffer == 0)
-				//break;
-				goto end;
+				break;
 			
+			serialFlush(serialFD);
 			std::cout << "received: " << (int)inbuffer << std::endl;
 //		}
 	}
-	
-	end:
 	
 	serialClose(serialFD);
 	digitalWrite(0, 0);
