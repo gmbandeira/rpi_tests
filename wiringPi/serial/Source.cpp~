@@ -25,7 +25,7 @@ int main()
 	delay(100);
 	digitalWriteByte(0);
 */	
-	int serialFD = serialOpen("/dev/ttyUSB0", 9600);
+	int serialFD = serialOpen("/dev/ttyAMA0", 9600);
 	if(serialFD < 0)
 	{
 		std::cout << "error connecting usb device" << std::endl;
@@ -54,7 +54,7 @@ int main()
 	{
 //		if(serialDataAvail(serialFD) > 0)
 //		{
-			char inbuffer = serialGetchar(serialFD);
+			int inbuffer = serialGetchar(serialFD);
 			if(inbuffer == 'x' || inbuffer == -1)
 				break;
 			

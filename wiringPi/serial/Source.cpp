@@ -54,7 +54,7 @@ int main()
 	{
 //		if(serialDataAvail(serialFD) > 0)
 //		{
-			char inbuffer = serialGetchar(serialFD);
+			byte inbuffer = serialGetchar(serialFD);
 			if(inbuffer == 'x' || inbuffer == -1)
 				break;
 			
