@@ -50,12 +50,15 @@ int main()
 	
 	digitalWrite(0, 1);
 	
+	for(unsigned char outBuffer = 0; outBuffer < 'x'; outBuffer++
+		serialPutchar(serialFD, outBuffer);
+	
 	while(1)
 	{
 //		if(serialDataAvail(serialFD) > 0)
 //		{
 			int inbuffer = serialGetchar(serialFD);
-			if(inbuffer == 'x' || inbuffer == -1)
+			if(inbuffer == 'x' || inbuffer == -1 || inbuffer == 0)
 				break;
 			
 			std::cout << "received: " << inbuffer << std::endl;
