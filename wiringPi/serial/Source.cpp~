@@ -39,9 +39,13 @@ int main()
 	
 	while(1)
 	{
-		if(seralDataAvail(serialFD) > 0)
+		if(serialDataAvail(serialFD) > 0)
 		{
+			char inbuffer = serialGetchar(serialFD);
+			if(inbuffer == 'x')
+				break;
 			
+			std::cout << "received: " << inbuffer << std::endl;
 		}
 	}
 	

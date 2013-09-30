@@ -24,7 +24,7 @@ int main()
 	delay(100);
 	digitalWriteByte(0);
 	
-	int serialFD = serialOpen("/dev/ttyAMA0", 9600);
+	int serialFD = serialOpen("/dev/ttyAMA0", 115200);
 	if(serialFD < 0)
 	{
 		std::cout << "error connecting usb device" << std::endl;
