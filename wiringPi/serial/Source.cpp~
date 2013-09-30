@@ -61,7 +61,7 @@ int main()
 			if(inbuffer == 'x' || inbuffer == -1 || inbuffer == 0)
 				break;
 			
-			std::cout << "received: " << inbuffer << std::endl;
+			std::cout << "received: " << (int)inbuffer << std::endl;
 //		}
 	}
 	
