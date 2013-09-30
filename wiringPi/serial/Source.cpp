@@ -25,6 +25,16 @@ int main()
 	delay(100);
 	digitalWriteByte(0);
 */	
+	if(wiringPiSetup() == -1)
+	{
+		std::cout << "error seting up comm" << std::endl;
+		return -1;
+	}
+	else
+	{
+		std::cout << "comm sucessfully set up" << std::endl;
+	}
+
 	int serialFD = serialOpen("/dev/ttyAMA0", 9600);
 	if(serialFD < 0)
 	{
@@ -35,20 +45,6 @@ int main()
 	{
 		std::cout << "connected USB device: " << serialFD << std::endl;
 	}
-	
-	digitalWrite(0, 0);
-	
-	if(wiringPiSetup() == -1)
-	{
-		std::cout << "error seting up comm" << std::endl;
-		return -1;
-	}
-	else
-	{
-		std::cout << "comm sucessfully set up" << std::endl;
-	}
-	
-	digitalWrite(0, 1);
 	
 	for(unsigned char outBuffer = 0; outBuffer < 'x'; outBuffer++)
 		serialPutchar(serialFD, outBuffer);
