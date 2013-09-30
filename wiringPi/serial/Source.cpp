@@ -46,7 +46,7 @@ int main()
 		std::cout << "connected USB device: " << serialFD << std::endl;
 	}
 	
-	for(unsigned char outBuffer = 0; outBuffer < 'x'; outBuffer++)
+	for(unsigned char outBuffer = 0; outBuffer < 'z'; outBuffer++)
 		serialPutchar(serialFD, outBuffer);
 	
 	while(1)
@@ -58,7 +58,7 @@ int main()
 				break;
 			
 			serialFlush(serialFD);
-			std::cout << "received: " << (int)inbuffer << std::endl;
+			std::cout << "received: " << (int)inbuffer - '0' << std::endl;
 //		}
 	}
 	

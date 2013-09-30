@@ -46,12 +46,7 @@ int main()
 		std::cout << "connected USB device: " << serialFD << std::endl;
 	}
 	
-	digitalWrite(0, 0);
-	
-	
-	digitalWrite(0, 1);
-	
-	for(unsigned char outBuffer = 0; outBuffer < 'x'; outBuffer++)
+	for(unsigned char outBuffer = 0; outBuffer < 'z'; outBuffer++)
 		serialPutchar(serialFD, outBuffer);
 	
 	while(1)
