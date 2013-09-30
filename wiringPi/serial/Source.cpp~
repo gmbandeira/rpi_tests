@@ -38,8 +38,19 @@ int main()
 	int serialFD = serialOpen("/dev/ttyACM0", 9600);
 	if(serialFD < 0)
 	{
-		std::cout << "error connecting usb device" << std::endl;
-		return -1;
+		std::cout << "error connecting usb [ACM0] device" << std::endl;
+		serialFD = serialOpen("/dev/ttyAMA0", 9600);
+		if(serialFD < 0)
+		{
+			std::cout << "error connecting usb [AMA0] device" << std::endl;
+			serialFD = serialOpen("/dev/ttyUSB0", 9600);
+			if(serialFD < 0)
+			{
+				std::cout << "error connecting usb [USB0] device" << std::endl;
+				return -1;
+
+			}
+		}
 	}
 	else
 	{

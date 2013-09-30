@@ -35,16 +35,25 @@ int main()
 		std::cout << "comm sucessfully set up" << std::endl;
 	}
 
-	int serialFD = serialOpen("/dev/serial", 9600);
+	int serialFD = serialOpen("/dev/ttyACM0", 9600);
 	if(serialFD < 0)
 	{
-		std::cout << "error connecting usb device" << std::endl;
-		return -1;
+		std::cout << "error connecting usb [ACM0] device" << std::endl;
+		serialFD = serialOpen("/dev/ttyAMA0", 9600);
+		if(serialFD < 0)
+		{
+			std::cout << "error connecting usb [AMA0] device" << std::endl;
+			serialFD = serialOpen("/dev/ttyUSB0", 9600);
+			if(serialFD < 0)
+			{
+				std::cout << "error connecting usb [USB0] device" << std::endl;
+				return -1;
+
+			}
+		}
 	}
-	else
-	{
-		std::cout << "connected USB device: " << serialFD << std::endl;
-	}
+
+	std::cout << "connected USB device: " << serialFD << std::endl;
 	
 	for(unsigned char outBuffer = 0; outBuffer < 'z'; outBuffer++)
 		serialPutchar(serialFD, outBuffer);
