@@ -35,7 +35,7 @@ int main()
 		std::cout << "comm sucessfully set up" << std::endl;
 	}
 
-	int serialFD = serialOpen("/dev/ttyAMA0", 9600);
+	int serialFD = serialOpen("/dev/ttyACM0", 9600);
 	if(serialFD < 0)
 	{
 		std::cout << "error connecting usb device" << std::endl;
