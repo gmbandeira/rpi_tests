@@ -186,7 +186,7 @@ void v4l_loop()
 	digitalWrite(0, 0);
 	cvtToOpencv();
 	original = img.clone();
-	cv::cvtColor(img, img, CV_BGR2HSV);
+//	cv::cvtColor(img, img, CV_BGR2HSV);
 
 	blue = img.clone();
 	red = img.clone();
