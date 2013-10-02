@@ -238,7 +238,7 @@ int getDirection(cv::Mat img, int proportional, float precision)
 	int counter = 1;
 	int limit = img.rows;//7 * img.rows / 8;
 
-	for(int y = 0;/*img.rows / 8*/; y < limit; y += jump)
+	for(int y = 0;/*img.rows / 8;*/ y < limit; y += jump)
 	{
 		for(int x = 0; x < img.cols * 3; x += jump)
 		{
