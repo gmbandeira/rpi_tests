@@ -43,7 +43,7 @@
 
 #ifndef _MY_OPEN_DEFINES_
 #define _MY_OPEN_DEFINES_
-
+/*
 	#define MIN_RED 170
 	#define MAX_RED 255
 
@@ -52,6 +52,7 @@
 
 	#define MIN_BLUE 0
 	#define MAX_BLUE 120
+*/
 /*
 	#define MIN_VALUE_RED 0//130
 	#define MAX_VALUE_RED 256
@@ -72,6 +73,7 @@
 	#define MIN_SATURATION_BLUE 100
 	#define MAX_SATURATION_BLUE 256
 */
+/*
 	#define TYPE_GET_MAX_RED 0
 	#define TYPE_GET_MAX_BLUE 1
 
@@ -97,7 +99,7 @@
 
 	#define MIN_SATURATION_BLUE 100
 	#define MAX_SATURATION_BLUE 256
-
+*/
 #endif
 
 #ifndef _MY_V4L_DEFINES_

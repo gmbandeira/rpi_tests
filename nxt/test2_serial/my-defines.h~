@@ -72,6 +72,7 @@
 	#define MIN_SATURATION_BLUE 100
 	#define MAX_SATURATION_BLUE 256
 */
+/*
 	#define TYPE_GET_MAX_RED 0
 	#define TYPE_GET_MAX_BLUE 1
 
@@ -97,7 +98,7 @@
 
 	#define MIN_SATURATION_BLUE 100
 	#define MAX_SATURATION_BLUE 256
-
+*/
 #endif
 
 #ifndef _MY_V4L_DEFINES_
@@ -123,6 +124,6 @@
 	#define initialSpeed 60
 
 	#define MAX_SPEED 100
-	#define MIN_SPEED 60
+	#define MIN_SPEED 20
 
 #endif

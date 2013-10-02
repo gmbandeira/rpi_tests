@@ -40,7 +40,7 @@ void	loop			();
 void	legoAct			(int error);
 void	merge			(cv::Mat dest, cv::Mat img0, cv::Mat img1);
 int		dir				(cv::Mat img, int proportional = 80, float precision = 1);
-int		getDirection	(cv::Mat img, int proportional = 80, float precision = 1);
+int		getDirection	(cv::Mat img, int proportional = 60, float precision = 1);
 bool	isRed			(cv::Scalar dot);
 bool	isBlue			(cv::Scalar dot);
 void	getRed			(cv::Mat dest);
@@ -75,7 +75,7 @@ void thresh(cv::Mat img, cv::Mat dest, int thresh_type = THRESH_TYPE_GET_RED, in
 	FILE								*fout;
 	struct buffer						*buffers;
 	
-	unsigned char getMaxValueCounter = 0;
+	unsigned char getMaxRedCounter = 0, getMaxBlueCounter = 0;
 
 	int error = 0;
 	cv::Mat img, blue, red, original, canned, merged;
@@ -122,10 +122,10 @@ void thresh(cv::Mat img, cv::Mat dest, int thresh_type, int thresh, int diff_red
 	
 	if(thresh_type == THRESH_TYPE_GET_RED)
 	{
-		if(getMaxValueCounter++ == 30)
+		if(getMaxRedCounter++ == 30)
 		{
 			max = maxValue(img, TYPE_GET_MAX_RED) - thresh;
-			getMaxValueCounter = 0;
+			getMaxRedCounter = 0;
 		}
 		while(point != end)
 		{
@@ -151,10 +151,10 @@ void thresh(cv::Mat img, cv::Mat dest, int thresh_type, int thresh, int diff_red
 
 	else if(thresh_type == THRESH_TYPE_GET_BLUE)
 	{
-		if(getMaxValueCounter++ == 30)
+		if(getMaxBlueCounter++ == 30)
 		{
 			max = maxValue(img, TYPE_GET_MAX_BLUE) - thresh;
-			getMaxValueCounter = 0;
+			getMaxBlueCounter = 0;
 		}
 		while(point != end)
 		{
@@ -182,35 +182,35 @@ void thresh(cv::Mat img, cv::Mat dest, int thresh_type, int thresh, int diff_red
 
 void v4l_loop()
 {
-	clock_t initialTime = clock();
+//	clock_t initialTime = clock();
 	digitalWrite(0, 0);
 	cvtToOpencv();
-	original = img.clone();
+//	original = img.clone();
 //	cv::cvtColor(img, img, CV_BGR2HSV);
 
 	blue = img.clone();
 	red = img.clone();
-	canned = img.clone();
+//	canned = img.clone();
 	merged = img.clone();
 
 	thresh(red, red, THRESH_TYPE_GET_RED);
 	thresh(blue, blue, THRESH_TYPE_GET_BLUE);
 
 	merge(merged, blue, red);
-	cv::Canny(merged, canned, 50, 100);
+//	cv::Canny(merged, canned, 50, 100);
 
-	error = getDirection(merged, 60);
+	error = getDirection(merged);
 
 	legoAct(error);
 	digitalWrite(0, 1);
 
-	std::cout << "clocks: " << (int)(clock() - initialTime) << std::endl;
+//	std::cout << "clocks: " << (int)(clock() - initialTime) << std::endl;
 }
 
 
 void legoAct(int error)
 {
-	if(dev_handle)
+//	if(dev_handle)
 		motorPID(error);
 }
 
@@ -236,9 +236,9 @@ int getDirection(cv::Mat img, int proportional, float precision)
 {
 	int direction = 0, jump = 3;
 	int counter = 1;
-	int limit = 7 * img.rows / 8;
+	int limit = img.rows;//7 * img.rows / 8;
 
-	for(int y = img.rows / 8; y < limit; y += jump)
+	for(int y = 0;/*img.rows / 8*/; y < limit; y += jump)
 	{
 		for(int x = 0; x < img.cols * 3; x += jump)
 		{
