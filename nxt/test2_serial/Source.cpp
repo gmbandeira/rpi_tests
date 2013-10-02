@@ -1,5 +1,5 @@
 
-// g++ Source.cpp `pkg-config opencv --libs --cflags` -lusb-1.0 -lv4l2 -I/usr/local/include -L/usr/local/lib -lwiringPi
+// g++ Source.cpp `pkg-config opencv --libs --cflags` -lusb-1.0 -lv4l2 -I/usr/local/include -L/usr/local/lib -lwiringPi -O3
 
 #include <opencv2/opencv.hpp>
 #include <opencv/highgui.h>
@@ -210,9 +210,7 @@ void v4l_loop()
 
 void legoAct(int error)
 {
-#ifndef _WIN32
 	if(dev_handle)
-#endif
 		motorPID(error);
 }
 
