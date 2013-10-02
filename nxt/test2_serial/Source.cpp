@@ -118,13 +118,13 @@ void thresh(cv::Mat img, cv::Mat dest, int thresh_type, int thresh, int diff_red
 {
 	uchar *end = img.dataend, *point = img.data;
 	uchar *dest_point = dest.data;
-	static uchar max, blue, green, red;
+	static uchar maxRed, maxBlue, blue, green, red;
 	
 	if(thresh_type == THRESH_TYPE_GET_RED)
 	{
 		if(getMaxRedCounter++ == 30)
 		{
-			max = maxValue(img, TYPE_GET_MAX_RED) - thresh;
+			maxRed = maxValue(img, TYPE_GET_MAX_RED) - thresh;
 			getMaxRedCounter = 0;
 		}
 		while(point != end)
@@ -133,7 +133,7 @@ void thresh(cv::Mat img, cv::Mat dest, int thresh_type, int thresh, int diff_red
 			green= *point++;
 			red = *point++;
 
-			if(blue < (red - diff_red) && green < (red - diff_red) && (red - diff_red) >= max)
+			if(blue < (red - diff_red) && green < (red - diff_red) && (red - diff_red) >= maxRed)
 			{
 				*(dest_point++) = 255;
 				*(dest_point++) = 255;
@@ -153,7 +153,7 @@ void thresh(cv::Mat img, cv::Mat dest, int thresh_type, int thresh, int diff_red
 	{
 		if(getMaxBlueCounter++ == 30)
 		{
-			max = maxValue(img, TYPE_GET_MAX_BLUE) - thresh;
+			maxBlue = maxValue(img, TYPE_GET_MAX_BLUE) - thresh;
 			getMaxBlueCounter = 0;
 		}
 		while(point != end)
@@ -162,7 +162,7 @@ void thresh(cv::Mat img, cv::Mat dest, int thresh_type, int thresh, int diff_red
 			green= *point++;
 			red = *point++;
 
-			if(red < (blue - diff_blue) && green < (blue - diff_blue) && (blue - diff_blue) >= max)
+			if(red < (blue - diff_blue) && green < (blue - diff_blue) && (blue - diff_blue) >= maxBlue)
 			{
 				*(dest_point++) = 255;
 				*(dest_point++) = 255;

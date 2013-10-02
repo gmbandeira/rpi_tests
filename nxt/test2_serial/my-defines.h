@@ -73,13 +73,13 @@
 	#define MIN_SATURATION_BLUE 100
 	#define MAX_SATURATION_BLUE 256
 */
-/*
 	#define TYPE_GET_MAX_RED 0
 	#define TYPE_GET_MAX_BLUE 1
 
 	#define THRESH_TYPE_GET_RED	0
 	#define THRESH_TYPE_GET_BLUE 1
 	
+/*
 	
 	#define MIN_VALUE_RED 130
 	#define MAX_VALUE_RED 256
