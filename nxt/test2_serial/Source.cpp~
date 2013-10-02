@@ -210,9 +210,7 @@ void v4l_loop()
 
 void legoAct(int error)
 {
-#ifndef _WIN32
 	if(dev_handle)
-#endif
 		motorPID(error);
 }
 
