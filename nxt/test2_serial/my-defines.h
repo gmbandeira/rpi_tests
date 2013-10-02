@@ -123,6 +123,6 @@
 	#define initialSpeed 60
 
 	#define MAX_SPEED 100
-	#define MIN_SPEED 60
+	#define MIN_SPEED 20
 
 #endif

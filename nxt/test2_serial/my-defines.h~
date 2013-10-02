@@ -119,7 +119,7 @@
 #ifndef _NXT_MOTOR_MOVE_DEFINES_
 #define _NXT_MOTOR_MOVE_DEFINES_
 
-	#define KP 5
+	#define KP 8
 	#define initialSpeed 60
 
 	#define MAX_SPEED 100

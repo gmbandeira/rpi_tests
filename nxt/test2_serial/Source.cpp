@@ -54,7 +54,7 @@ void	xioctl			(int fh, int request, void *arg);
 void	saveCap			();
 void	cvtToOpencv		();
 
-unsigned char maxValue(cv::Mat img, int type = TYPE_GET_MAX_RED, int diff_red = 130, int diff_blue = 200);
+unsigned char maxValue(cv::Mat img, int type = TYPE_GET_MAX_RED, int diff_red = 200, int diff_blue = 250);
 void thresh(cv::Mat img, cv::Mat dest, int thresh_type = THRESH_TYPE_GET_RED, int thresh = 0, int diff_red = 30, int diff_blue = 10);
 
 

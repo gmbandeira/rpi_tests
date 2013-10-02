@@ -232,27 +232,6 @@ void merge(cv::Mat dest, cv::Mat img0, cv::Mat img1)
 	}
 }
 
-int dir(cv::Mat img, int proportional, float precision)
-{
-	int direction = 0, jump = 3;
-	int counter = 1;
-	int limit = 7 * img.rows / 8;
-
-	for(int y = img.rows / 8; y < limit; y += jump)
-	{
-		for(int x = 0; x < img.cols * 3; x += jump)
-		{
-			if(img.at<uchar>(y, x) > 50)
-			{
-				direction += (x - (3 * img.cols / 2));
-				counter++;
-			}
-		}
-	}
-
-	return ((int)direction / (proportional * precision * counter));
-}
-
 int getDirection(cv::Mat img, int proportional, float precision)
 {
 	int direction = 0, jump = 3;
@@ -272,62 +251,6 @@ int getDirection(cv::Mat img, int proportional, float precision)
 	}
 
 	return ((int)direction / (proportional * precision * counter));
-}
-
-bool isRed(uchar* dot)
-{
-	uchar value = *dot;
-	uchar saturation = *(++dot);
-	uchar hue = *(++dot);
-
-	return hue <= MAX_HUE_RED && hue >= MIN_HUE_RED &&
-		saturation >= MIN_SATURATION_RED && saturation <= MAX_SATURATION_RED &&
-		value >= MIN_VALUE_RED && value <= MAX_VALUE_RED;
-}
-
-bool isBlue(uchar* dot)
-{
-	uchar value = *dot;
-	uchar saturation = *(++dot);
-	uchar hue = *(++dot);
-
-	return hue <= MAX_HUE_BLUE && hue >= MIN_HUE_BLUE &&
-		saturation >= MIN_SATURATION_BLUE && saturation <= MAX_SATURATION_BLUE &&
-		value >= MIN_VALUE_BLUE && value <= MAX_VALUE_BLUE;
-}
-
-void getRed(cv::Mat dest)
-{
-	uchar* dest_ptr = dest.data;
-	uchar* dest_ptr_final = dest.dataend;
-
-	while(dest_ptr != dest_ptr_final)
-		if(isRed(dest_ptr)){
-			*(dest_ptr++) = 255;
-			*(dest_ptr++) = 255;
-			*(dest_ptr++) = 255;
-		}else{
-			*(dest_ptr++) = 0;
-			*(dest_ptr++) = 0;
-			*(dest_ptr++) = 0;
-		}
-}
-
-void getBlue(cv::Mat dest)
-{
-	uchar* dest_ptr = dest.data;
-	uchar* dest_ptr_final = dest.dataend;
-
-	while(dest_ptr != dest_ptr_final)
-		if(isBlue(dest_ptr)){
-			*(dest_ptr++) = 255;
-			*(dest_ptr++) = 255;
-			*(dest_ptr++) = 255;
-		}else{
-			*(dest_ptr++) = 0;
-			*(dest_ptr++) = 0;
-			*(dest_ptr++) = 0;
-		}
 }
 
 int main()
@@ -586,7 +509,7 @@ int motorMove(uchar motor, uchar speed, uchar mode, uchar regulation, uchar turn
     int sendAmount = 9;                             //how many data to send
     int actual, r;
 
-    data[0] = 0x80;					// do not wait for response
+    data[0] = 0x80;			// do not wait for response
     data[1] = 0x04;
     data[2] = motor;                //motor
     data[3] = speed;                //speed
