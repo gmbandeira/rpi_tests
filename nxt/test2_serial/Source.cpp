@@ -210,8 +210,10 @@ void v4l_loop()
 
 void legoAct(int error)
 {
-
-	motorPID(error);
+#ifndef _WIN32
+	if(dev_handle)
+#endif
+		motorPID(error);
 }
 
 void merge(cv::Mat dest, cv::Mat img0, cv::Mat img1)
@@ -393,17 +395,18 @@ int main()
 			std::cout << "...not anymore..." << std::endl;
 	}
 
-	r = libusb_claim_interface(dev_handle, 0);                      //claim interface 0 of device
+	if(dev_handle)
+		r = libusb_claim_interface(dev_handle, 0);                      //claim interface 0 of device
 
-	if(r < 0)
-	{
-		std::cout << "can not claim" << std::endl;
-		#ifdef NXT_ESSENTIAL
+	if(dev_handle)
+		if(r < 0)
+		{
+			std::cout << "can not claim" << std::endl;
 			return -1;
-		#endif
-	}
+		}
 
-	std::cout << "Interface claimed" << std::endl;
+	if(dev_handle)
+		std::cout << "Interface claimed" << std::endl;
 
 // Lib Video For Linux
 	// OPEN
