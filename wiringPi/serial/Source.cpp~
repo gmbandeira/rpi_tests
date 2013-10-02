@@ -52,10 +52,8 @@ int main()
 			}
 		}
 	}
-	else
-	{
-		std::cout << "connected USB device: " << serialFD << std::endl;
-	}
+
+	std::cout << "connected USB device: " << serialFD << std::endl;
 	
 	for(unsigned char outBuffer = 0; outBuffer < 'z'; outBuffer++)
 		serialPutchar(serialFD, outBuffer);

@@ -118,9 +118,9 @@ void v4l_loop()
 
 	error = getDirection(img, 60);
 
-	digitalWrite(0, 1);
-	legoAct(error);
 	digitalWrite(0, 0);
+	legoAct(error);
+	digitalWrite(0, 1);
 }
 
 #else

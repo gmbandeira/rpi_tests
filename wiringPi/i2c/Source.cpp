@@ -4,10 +4,12 @@
 
 #include <wiringPi.h>
 #include <wiringSerial.h>
+#include <wiringPiI2C.h>
 #include <iostream>
 
 int main()
 {
+//	int wiringPiI2CSetup (int devId);
 /*
 	int r = wiringPiSetup();
 	if(r < 0)

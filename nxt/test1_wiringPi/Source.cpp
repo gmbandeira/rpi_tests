@@ -737,7 +737,7 @@ int motorMove(uchar motor, uchar speed, uchar mode, uchar regulation, uchar turn
     int sendAmount = 9;                             //how many data to send
     int actual, r;
 
-    data[0] = 0x00;
+    data[0] = 0x80;
     data[1] = 0x04;
     data[2] = motor;                //motor
     data[3] = speed;                //speed

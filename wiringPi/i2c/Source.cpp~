@@ -4,6 +4,7 @@
 
 #include <wiringPi.h>
 #include <wiringSerial.h>
+#include <wiringPiI2C.h>
 #include <iostream>
 
 int main()
