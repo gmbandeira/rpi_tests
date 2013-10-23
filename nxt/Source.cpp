@@ -95,7 +95,7 @@ int		nxtClose		();
 	char								out_name[256];
 	FILE								*fout;
 	struct buffer						*buffers;
-	
+
 #endif
 
 #ifndef _WIN32
@@ -154,7 +154,7 @@ void v4l_loop()
 }
 
 #else
-	
+
 void loop()
 {
 	clock_t getCapTime, toHSVTime, getRedTime, getBlueTime, mergeTime, getTargetTime;

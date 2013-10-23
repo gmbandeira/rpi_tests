@@ -19,14 +19,14 @@ int main()
 	}
 	for(int i = 0; i < 8; i++)
 		pinMode(i, OUTPUT);
-	
+
 	//digitalWrite(1, 1);
 	digitalWriteByte(170);
 	delay(100);
 	digitalWriteByte(85);
 	delay(100);
 	digitalWriteByte(0);
-*/	
+*/
 	if(wiringPiSetup() == -1)
 	{
 		std::cout << "error seting up comm" << std::endl;
@@ -56,7 +56,7 @@ int main()
 	}
 
 	std::cout << "connected USB device: " << serialFD << std::endl;
-	
+
 
 	if(wiringPiSetup() == -1)
 	{
@@ -70,7 +70,7 @@ int main()
 
 	for(unsigned char outBuffer = 0; outBuffer < 'z'; outBuffer++)
 		serialPutchar(serialFD, outBuffer);
-	
+
 	while(1)
 	{
 //		if(serialDataAvail(serialFD) > 0)
@@ -78,12 +78,12 @@ int main()
 			int inbuffer = serialGetchar(serialFD);
 			if(inbuffer == 'x' || inbuffer == -1 || inbuffer == 0)
 				break;
-			
+
 			serialFlush(serialFD);
 			std::cout << "received: " << (int)inbuffer - '0' << std::endl;
 //		}
 	}
-	
+
 	serialClose(serialFD);
 	digitalWrite(0, 0);
 
