@@ -47,4 +47,4 @@ To start monitor:
 	[open TightVNC View]
 	[remote host = ip:port]	192.168.0.176:1
 	[main server port] 5901
-
+	[serverpi]

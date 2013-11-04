@@ -74,7 +74,7 @@ void thresh(cv::Mat img, cv::Mat dest, int thresh_type = THRESH_TYPE_GET_RED, in
 	char								out_name[256];
 	FILE								*fout;
 	struct buffer						*buffers;
-	
+
 	unsigned char getMaxRedCounter = 0, getMaxBlueCounter = 0;
 
 	int error = 0;
@@ -97,7 +97,7 @@ unsigned char maxValue(cv::Mat img, int type, int diff_red, int diff_blue)
 				max = red;
 		}
 	}
-	
+
 	else if(type == TYPE_GET_MAX_BLUE)
 	{
 		while(point != end)
@@ -119,7 +119,7 @@ void thresh(cv::Mat img, cv::Mat dest, int thresh_type, int thresh, int diff_red
 	uchar *end = img.dataend, *point = img.data;
 	uchar *dest_point = dest.data;
 	static uchar maxRed, maxBlue, blue, green, red;
-	
+
 	if(thresh_type == THRESH_TYPE_GET_RED)
 	{
 		if(getMaxRedCounter++ == 30)

@@ -1,4 +1,5 @@
-// g++ stop.cpp -lusb-1.0 -I/usr/local/include -L/usr/local/lib -lwiringPi
+
+// time g++ stop.cpp -lusb-1.0 -I/usr/local/include -L/usr/local/lib -lwiringPi -O3 -o stop.out
 
 #include <wiringPi.h>
 #include <libusb-1.0/libusb.h>
@@ -6,7 +7,7 @@
 #include "my-defines.h"
 
 // Lib USB 1.0
-	libusb_device_handle				*dev_handle;
+	libusb_device_handle			*dev_handle;
 	libusb_context					*ctx;
 
 int motorMove(unsigned char motor = 0xff, unsigned char speed = 50, unsigned char mode = 1, unsigned char regulation = 1, unsigned char turn = 0x90)
@@ -15,7 +16,7 @@ int motorMove(unsigned char motor = 0xff, unsigned char speed = 50, unsigned cha
     int sendAmount = 9;                             //how many data to send
     int actual, r;
 
-    data[0] = 0x00;
+    data[0] = 0x80;
     data[1] = 0x04;
     data[2] = motor;                //motor
     data[3] = speed;                //speed
@@ -34,9 +35,10 @@ int motorMove(unsigned char motor = 0xff, unsigned char speed = 50, unsigned cha
 
 int nxtClose()
 {
+	int counter = 0;
 	motorMove(OUT_ABC, 0);
 
-	libusb_release_interface(dev_handle, 0);
+	while(libusb_release_interface(dev_handle, 0) != 0 && counter < 5);
 	libusb_close(dev_handle);
 	libusb_exit(ctx);
 

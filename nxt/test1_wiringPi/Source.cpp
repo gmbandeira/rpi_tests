@@ -96,7 +96,7 @@ int		nxtClose		();
 	char								out_name[256];
 	FILE								*fout;
 	struct buffer						*buffers;
-	
+
 #endif
 
 #ifndef _WIN32
@@ -124,7 +124,7 @@ void v4l_loop()
 }
 
 #else
-	
+
 void loop()
 {
 	clock_t getCapTime, toHSVTime, getRedTime, getBlueTime, mergeTime, getTargetTime;
@@ -381,7 +381,7 @@ int main()
 	}
 	for(int i = 0; i < 8; i++)
 		pinMode(i, OUTPUT);
-	
+
 	//digitalWrite(1, 1);
 	digitalWriteByte(170);
 	delay(100);
@@ -530,7 +530,7 @@ int main()
 
 			r = select(fd + 1, &fds, NULL, NULL, &tv);
 		} while ((r == -1 && (errno = EINTR)));
-		
+
 		if (r == -1)
 		{
 			perror("select");
@@ -545,7 +545,7 @@ int main()
 		xioctl(fd, VIDIOC_DQBUF, &buf);
 		saveCap();
 		xioctl(fd, VIDIOC_QBUF, &buf);
-		
+
 		for(;;)
 		{
 			// GET CAP
@@ -572,8 +572,8 @@ int main()
 
 void motorPID(int error)
 {
-	motorMove(OUT_B, initialSpeed + (error * KP));
-	motorMove(OUT_C, initialSpeed - (error * KP));
+	motorMove(OUT_B, (-1) * (initialSpeed + (error * KP)));
+	motorMove(OUT_C, (-1) * (initialSpeed - (error * KP)));
 }
 
 int nxtClose()
@@ -583,7 +583,7 @@ int nxtClose()
 	{
 		NXT::Motor::BrakeOn(&comm, OUT_A);
 		NXT::Motor::BrakeOn(&comm, OUT_B);
-		NXT::Motor::BrakeOn(&comm, OUT_C);		
+		NXT::Motor::BrakeOn(&comm, OUT_C);
 		NXT::Close(&comm);
 	}
 
